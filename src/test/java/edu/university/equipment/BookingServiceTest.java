@@ -37,6 +37,7 @@ void sequentialBookingsWithinInventoryAreAccepted() {
     assertEquals(2, service.listBookings().size());
 }
 
+
 @Test
 void sequentialBookingsExceedingInventoryAreRejected() {
     Booking first = service.create("STU1001", "LAPTOP01", 6);
@@ -46,7 +47,11 @@ void sequentialBookingsExceedingInventoryAreRejected() {
 
     assertEquals(4, service.getEquipment("LAPTOP01").getAvailableQuantity());
     assertEquals(1, service.listBookings().size());
-    assertEquals("CONFIRMED", first.getStatus());
+
+    Booking stored = service.getBooking(first.getId());
+    assertEquals("CONFIRMED", stored.getStatus());
+    assertEquals(6, stored.getQuantity());
 }
+
 
 }
