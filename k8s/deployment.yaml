@@ -1,0 +1,21 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: campus-equipment-booking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: campus-equipment-booking
+  template:
+    metadata:
+      labels:
+        app: campus-equipment-booking
+    spec:
+      containers:
+        - name: booking-app
+          image: campus-equipment-booking:set-g
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
